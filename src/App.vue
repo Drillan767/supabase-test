@@ -14,7 +14,14 @@ await supabase.auth.signInWithOAuth({
 
 const authSession = ref<Session | null>()
 
-onMounted(() => {
+onMounted(async () => {
+    // Handle OAuth callback
+    const { data, error } = await supabase.auth.getSession()
+    if (data.session) {
+        authSession.value = data.session
+        console.log('User signed in:', data.session.user)
+    }
+    
     supabase.auth.onAuthStateChange((event, session) => {
         if (event === 'SIGNED_IN') {
             authSession.value = session
