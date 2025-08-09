@@ -7,8 +7,8 @@ async function signInWithTwitter() {
 await supabase.auth.signInWithOAuth({
         provider: 'twitter',
         options: {
-        redirectTo: window.location.origin
-        }
+            redirectTo: 'http://localhost:5173', // Adjust this URL to your app's callback URL
+        },
     })
 }
 
