@@ -21,7 +21,9 @@ onMounted(async () => {
         authSession.value = data.session
         console.log('User signed in:', data.session.user)
     }
-    
+    if (error) {
+        console.error('Error fetching session:', error.message)
+    }
     supabase.auth.onAuthStateChange((event, session) => {
         if (event === 'SIGNED_IN') {
             authSession.value = session
