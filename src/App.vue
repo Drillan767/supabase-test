@@ -4,7 +4,7 @@ import { ref, onMounted } from 'vue'
 import { supabase } from './utils/supabase'
 
 async function signInWithTwitter() {
-const { data, error } = await supabase.auth.signInWithOAuth({
+await supabase.auth.signInWithOAuth({
         provider: 'twitter',
         options: {
         redirectTo: window.location.origin
@@ -18,7 +18,7 @@ onMounted(() => {
     supabase.auth.onAuthStateChange((event, session) => {
         if (event === 'SIGNED_IN') {
             authSession.value = session
-            console.log('User signed in:', session.user)
+            console.log('User signed in:', session?.user)
         }
     })
 })

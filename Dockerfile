@@ -2,11 +2,10 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-RUN npm i -g serve
-
-RUN yarn install --frozen-lockfile
-
 COPY . .
+
+RUN npm i -g serve && \
+    yarn install --frozen-lockfile
 
 RUN yarn build
 
